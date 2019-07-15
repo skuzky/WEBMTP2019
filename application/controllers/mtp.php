@@ -80,6 +80,28 @@ class Mtp extends CI_Controller
 		$this->load->view('form_seminar.php');
 	}
 
+		public function saveSeminar(){
+		$this->init_valid();
+		if($this->form_validation->run() == FALSE) {
+			$this->load->view('layout_mtp_add');
+		}
+		else{
+			$dataseminar = array(
+				'nama_tim'=>set_value('nama_tim'), 
+				'hari_tgl' =>set_value('hari_tanggal'),	
+				'tempat_ujian'=>set_value('tempat_ujian'),
+				'judul_mtp'=>set_value('judul_mtp'),
+				'penguji'=>set_value('penguji'),						
+				'email'=>set_value('email') );
+			$quser = $this->modseminar->insert($datamtp);
+			if ($quser==TRUE){
+				redirect('mtp');
+			}else {
+				echo "Gagal simpan";
+				}
+			}
+		}
+
 
 }
 
